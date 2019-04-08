@@ -127,7 +127,7 @@ class GpgPear extends AbstractGpg
                 $sp->close();
                 $ret = $this->cryptGpg->verifyFile($plain, $signature);
             }
-            return !empty(array_filter($ret, function ($e) { return $e->isValid(); } ));
+            return (count(array_filter($ret, function ($e) { return $e->isValid(); } )) !== 0);
         } catch (Exception $e) {
         }
         return false;
