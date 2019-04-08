@@ -17,8 +17,10 @@ class GpgPearTest extends TestCase
     protected function setUp()
     {
         $this->pear = new Crypt_GPG([
-            'homedir' => dirname(__DIR__) . '/_data/keyring'
+            'homedir' => dirname(__DIR__) . '/_data/keyring',
         ]);
+        $this->pear->importKeyFile(dirname(__DIR__) . '/_data/private.gpg');
+        $this->pear->importKeyFile(dirname(__DIR__) . '/_data/public.gpg');
     }
 
     public function testEncryptDecrypt()
