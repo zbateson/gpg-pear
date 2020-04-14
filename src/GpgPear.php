@@ -10,14 +10,14 @@ use Crypt_GPG;
 use Exception;
 use GuzzleHttp\Psr7;
 use Psr\Http\Message\StreamInterface;
-use ZBateson\GpgInterface\AbstractGpg;
+use ZBateson\CryptInterface\AbstractCrypt;
 
 /**
- * Implementation of GpgInterface using pear's Crypt_GPG
+ * Implementation of ICrypt using pear's Crypt_GPG
  *
  * @author Zaahid Bateson
  */
-class GpgPear extends AbstractGpg
+class GpgPear extends AbstractCrypt
 {
     /**
      * @var Crypt_GPG
@@ -131,5 +131,19 @@ class GpgPear extends AbstractGpg
         } catch (Exception $e) {
         }
         return false;
+    }
+
+    /**
+     * Returns true for:
+     *  - application/(x-)?pgp-encrypted (if version equals the string
+     *    'Version: 1')
+     *  - application/(x-)?pgp-signature
+     */
+    public function isSupported($mimeType, $version = null)
+    {
+        if (preg_match('/^application\/(x-)?pgp-encrypted$/', $mimeType)) {
+            return (strcasecmp('Version: 1', trim($version)) === 0);
+        }
+        return (bool) preg_match('/^application\/(x-)?pgp-signature$/', $mimeType);
     }
 }

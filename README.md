@@ -1,7 +1,7 @@
 # gpg-pear
-Implementation of [zbateson/gpg-interface](https://github.com/zbateson/gpg-interface) using [pear/Crypt_GPG](https://github.com/pear/Crypt_GPG).  This library is intended for use with [zbateson/mail-mime-parser](https://github.com/zbateson/mail-mime-parser) to integrate encryption, decryption, signing, or verification with the mail-mime-parser library.
+Implementation of [zbateson/crypt-interface](https://github.com/zbateson/crypt-interface) using [pear/Crypt_GPG](https://github.com/pear/Crypt_GPG).  This library is intended for use with [zbateson/mail-mime-parser](https://github.com/zbateson/mail-mime-parser) to integrate encryption, decryption, signing, or verification with the mail-mime-parser library.
 
-The library isn't intended to abstract pear/Crypt_GPG, and so its expected that any required setup is performed using pear/Crypt_GPG's APIs directly.  [Click here for pear/Crypt_GPG's documentation](https://pear.php.net/manual/en/package.encryption.crypt-gpg.php).
+The library isn't intended to abstract pear/Crypt_GPG, and so it's expected that any required setup is performed using pear/Crypt_GPG's APIs directly.  [Click here for pear/Crypt_GPG's documentation](https://pear.php.net/manual/en/package.encryption.crypt-gpg.php).
 
 *NOTE*: this library is still a work-in-progress, and its usage in zbateson/mail-mime-parser hasn't yet been completed.
 
@@ -13,7 +13,7 @@ composer require zbateson/gpg-pear
 
 ## Requirements
 
-gpg-interface requires PHP 5.4 or newer.
+crypt-interface requires PHP 5.4 or newer.
 
 ## Usage
 
@@ -34,4 +34,4 @@ $gpgPear = new GpgPear($pear);
 
 ## License
 
-BSD licensed - please see [license agreement](https://github.com/zbateson/gpg-interface/blob/master/LICENSE).
+BSD licensed - please see [license agreement](https://github.com/zbateson/crypt-interface/blob/master/LICENSE).

@@ -82,4 +82,46 @@ class GpgPearTest extends TestCase
         $gpgPear = new GpgPear($this->pear);
         $this->assertFalse($gpgPear->verify('Test', 'blah-blah-blah'));
     }
+
+    public function testPgpEncryptedSupported()
+    {
+        $gpgPear = new GpgPear($this->pear);
+        $this->assertTrue($gpgPear->isSupported('application/pgp-encrypted', 'Version: 1'));
+    }
+
+    public function testPgpEncryptedWrongVersionUnsupported()
+    {
+        $gpgPear = new GpgPear($this->pear);
+        $this->assertFalse($gpgPear->isSupported('application/pgp-encrypted', 'Version: 2'));
+    }
+
+    public function testXPgpEncryptedSupported()
+    {
+        $gpgPear = new GpgPear($this->pear);
+        $this->assertTrue($gpgPear->isSupported('application/x-pgp-encrypted', 'Version: 1'));
+    }
+
+    public function testPgpEncryptedNullVersionUnsupported()
+    {
+        $gpgPear = new GpgPear($this->pear);
+        $this->assertFalse($gpgPear->isSupported('application/pgp-encrypted'));
+    }
+
+    public function testPgpSignatureSupported()
+    {
+        $gpgPear = new GpgPear($this->pear);
+        $this->assertTrue($gpgPear->isSupported('application/pgp-signature'));
+    }
+
+    public function testXPgpSignatureSupported()
+    {
+        $gpgPear = new GpgPear($this->pear);
+        $this->assertTrue($gpgPear->isSupported('application/x-pgp-signature'));
+    }
+
+    public function testUnknownMimeTypeUnsupported()
+    {
+        $gpgPear = new GpgPear($this->pear);
+        $this->assertFalse($gpgPear->isSupported('application/not-supported', 'Version: 1'));
+    }
 }
